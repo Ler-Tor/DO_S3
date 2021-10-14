@@ -1,0 +1,6 @@
+framework module Pods_DO_S3 {
+  umbrella header "Pods-DO_S3-umbrella.h"
+
+  export *
+  module * { export * }
+}

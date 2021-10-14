@@ -6,14 +6,42 @@
 //
 
 import UIKit
+import AWSS3
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    private let spacesRepository = SpacesRepository()
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBAction func uploadExampleFile(){
+        spacesRepository.uploadExampleFile()
     }
-
+    
+    @IBAction func downloadExampleFile(){
+        spacesRepository.downloadExampleFile { (data, error) in
+            guard let data = data else {
+                print("Image failed to download")
+                return
+            }
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data)
+                
+            }
+        }
+    }
+    
+    
+    // Для спиннера 
+    private func showSpinner() {
+        activityIndicator.startAnimating()
+        
+    }
+    
+    private func hideSpinner(){
+        
+    }
 
 }
 
